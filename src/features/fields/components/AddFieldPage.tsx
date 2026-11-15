@@ -7,7 +7,7 @@ export const AddFieldPage: React.FC = () => {
   const { addField } = useFields();
 
   const handleCreate = async (data: FieldFormData) => {
-    await addField(data);
+    return await addField(data);
   };
 
   return (

@@ -8,7 +8,7 @@ import type { FieldFormData } from '../../../types/index';
 
 interface FieldFormProps {
   initialData?: FieldFormData;
-  onSubmit: (data: FieldFormData) => Promise<void>;
+  onSubmit: (data: FieldFormData) => Promise<string | void>;
   submitLabel?: string;
   title: string;
 }
@@ -102,7 +102,7 @@ export const FieldForm: React.FC<FieldFormProps> = ({
 
     setSubmitting(true);
     try {
-      await onSubmit({
+      const result = await onSubmit({
         name: trimmedName,
         latitude,
         longitude,
@@ -111,7 +111,13 @@ export const FieldForm: React.FC<FieldFormProps> = ({
         district: district.trim() || undefined,
         village: village.trim() || undefined,
       });
-      navigate('/fields');
+
+      if (typeof result === 'string' && result) {
+        // Newly created field -> guide directly to Step 2 (Check-in)!
+        navigate(`/fields/${result}/checkin`);
+      } else {
+        navigate('/fields');
+      }
     } catch (err: unknown) {
       const e = err as Error;
       setError(e.message || 'Failed to save field. Please try again.');

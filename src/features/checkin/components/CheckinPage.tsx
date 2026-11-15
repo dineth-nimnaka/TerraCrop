@@ -63,6 +63,7 @@ export const CheckinPage: React.FC = () => {
       <CheckinForm
         initialData={checkin}
         fieldName={field.name}
+        fieldId={field.id}
         onSave={handleSave}
         onCancel={() => navigate(`/fields/${field.id}`)}
       />

@@ -175,9 +175,9 @@ export const FieldsPage: React.FC = () => {
                 <div className="pt-3 border-t border-slate-100 flex flex-col gap-2">
                   <Link
                     to={`/fields/${field.id}`}
-                    className="w-full min-h-[44px] flex items-center justify-center space-x-1.5 px-4 py-2 bg-[#1B4332] hover:bg-[#2D6A4F] text-white rounded-xl text-sm font-semibold transition-colors"
+                    className="w-full min-h-[44px] flex items-center justify-center space-x-1.5 px-4 py-2.5 bg-[#1B4332] hover:bg-[#2D6A4F] text-white rounded-xl text-sm font-bold shadow-xs transition-colors"
                   >
-                    <span>Dashboard & Climate</span>
+                    <span>Open Field & Next Steps</span>
                     <span>→</span>
                   </Link>
 

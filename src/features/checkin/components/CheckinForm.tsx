@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card } from '../../../components/ui/Card';
 import { Button } from '../../../components/ui/Button';
 import type {
@@ -16,6 +17,7 @@ import type {
 interface CheckinFormProps {
   initialData?: CheckinData | null;
   fieldName: string;
+  fieldId: string;
   onSave: (data: Omit<CheckinData, 'id' | 'createdAt' | 'updatedAt'>) => Promise<void>;
   onCancel: () => void;
 }
@@ -23,9 +25,11 @@ interface CheckinFormProps {
 export const CheckinForm: React.FC<CheckinFormProps> = ({
   initialData,
   fieldName,
+  fieldId,
   onSave,
   onCancel,
 }) => {
+  const navigate = useNavigate();
   const [currentCrop, setCurrentCrop] = useState(initialData?.currentCrop || '');
   const [previousCrops, setPreviousCrops] = useState<string[]>(
     initialData?.previousCrops || [],
@@ -144,7 +148,7 @@ export const CheckinForm: React.FC<CheckinFormProps> = ({
     setSaving(true);
     try {
       await onSave({
-        fieldId: initialData?.fieldId || '',
+        fieldId: fieldId || initialData?.fieldId || '',
         currentCrop: currentCrop.trim(),
         previousCrops,
         landTenure,
@@ -165,7 +169,10 @@ export const CheckinForm: React.FC<CheckinFormProps> = ({
       });
 
       setSuccess(true);
-      setTimeout(() => setSuccess(false), 4000);
+      // Auto navigate to Recommendations after 1.2s
+      setTimeout(() => {
+        navigate(`/fields/${fieldId}/strategies`);
+      }, 1200);
     } catch (err: unknown) {
       const e = err as Error;
       setError(e.message || 'Failed to save field check-in record.');
@@ -187,11 +194,25 @@ export const CheckinForm: React.FC<CheckinFormProps> = ({
 
       {success && (
         <div
-          className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-medium flex items-center justify-between"
+          className="p-5 rounded-2xl bg-[#1B4332] text-white shadow-lg flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 animate-in fade-in"
           role="alert"
         >
-          <span>✓ Field check-in successfully saved to Firestore!</span>
-          <span className="text-xs text-emerald-600">Updated</span>
+          <div className="flex items-center space-x-3">
+            <span className="text-2xl">🎉</span>
+            <div>
+              <div className="font-extrabold text-base">Check-in Saved Successfully!</div>
+              <div className="text-xs text-emerald-200">
+                Opening your personalized crop rotation recommendations...
+              </div>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={() => navigate(`/fields/${fieldId}/strategies`)}
+            className="px-4 py-2 bg-white text-[#1B4332] font-bold text-xs rounded-xl hover:bg-emerald-50 self-start sm:self-auto shadow-sm"
+          >
+            View Crops Now →
+          </button>
         </div>
       )}
 
