@@ -13,13 +13,13 @@ const PARAMETERS = [
   'GWETROOT',
 ] as const;
 
-const MISSING_VALUE = -999;
+export const NASA_POWER_MISSING_VALUE = -999;
 
 function isMissing(value: unknown): boolean {
   if (value === null || value === undefined) return true;
   const num = typeof value === 'number' ? value : parseFloat(String(value));
   if (isNaN(num) || !Number.isFinite(num)) return true;
-  if (num <= -900) return true;
+  if (num <= -900 || num === NASA_POWER_MISSING_VALUE) return true;
   return false;
 }
 

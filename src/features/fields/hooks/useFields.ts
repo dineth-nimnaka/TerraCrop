@@ -6,8 +6,6 @@ import {
   updateDoc,
   deleteDoc,
   onSnapshot,
-  query,
-  orderBy,
   serverTimestamp,
   type DocumentData,
   type QuerySnapshot,
@@ -32,10 +30,9 @@ export function useFields() {
 
     setLoading(true);
     const fieldsRef = collection(db, 'users', user.uid, 'fields');
-    const q = query(fieldsRef, orderBy('createdAt', 'desc'));
 
     const unsubscribe = onSnapshot(
-      q,
+      fieldsRef,
       (snapshot: QuerySnapshot<DocumentData>) => {
         const loadedFields: Field[] = snapshot.docs.map((d) => {
           const data = d.data();
@@ -51,6 +48,13 @@ export function useFields() {
             createdAt: data.createdAt,
             updatedAt: data.updatedAt,
           } as Field;
+        });
+
+        // Client-side sort by createdAt descending
+        loadedFields.sort((a, b) => {
+          const timeA = a.createdAt?.toMillis ? a.createdAt.toMillis() : 0;
+          const timeB = b.createdAt?.toMillis ? b.createdAt.toMillis() : 0;
+          return timeB - timeA;
         });
 
         setFields(loadedFields);

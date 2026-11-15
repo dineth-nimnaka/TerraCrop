@@ -36,7 +36,7 @@ export const FieldDetailPage: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Breadcrumb & Actions Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white p-5 sm:p-6 rounded-[24px] border border-slate-200/90 shadow-sm">
         <div>
           <div className="flex items-center space-x-2 text-xs text-[#475569] mb-1">
             <Link to="/fields" className="hover:text-[#1B4332] font-medium">
@@ -45,12 +45,12 @@ export const FieldDetailPage: React.FC = () => {
             <span>/</span>
             <span className="text-[#0F172A] font-semibold">{field.name}</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-[#0F172A]">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A]">
             {field.name}
           </h1>
-          <p className="text-sm text-[#475569]">
+          <p className="text-xs sm:text-sm text-[#475569] mt-0.5">
             {[field.village, field.district].filter(Boolean).join(', ') || 'Sri Lanka'} •{' '}
-            <span className="font-mono text-xs">
+            <span className="font-mono text-xs text-slate-700">
               {field.latitude.toFixed(4)}°N, {field.longitude.toFixed(4)}°E
             </span>
             {field.area && ` • ${field.area} ${field.areaUnit || 'ha'}`}
@@ -58,11 +58,12 @@ export const FieldDetailPage: React.FC = () => {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2.5">
           <Link to={`/fields/${field.id}/checkin`}>
             <Button
               variant="outline"
               size="md"
+              className="rounded-2xl text-xs sm:text-sm font-bold border-slate-300 hover:border-[#1B4332]"
               icon={
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
@@ -77,6 +78,7 @@ export const FieldDetailPage: React.FC = () => {
             <Button
               variant="primary"
               size="md"
+              className="rounded-2xl text-xs sm:text-sm font-extrabold bg-[#1B4332] text-white shadow-sm hover:bg-[#245A43]"
               icon={
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -91,6 +93,7 @@ export const FieldDetailPage: React.FC = () => {
             <Button
               variant="secondary"
               size="md"
+              className="rounded-2xl text-xs sm:text-sm font-bold bg-slate-100 text-slate-800 hover:bg-slate-200"
               icon={
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />

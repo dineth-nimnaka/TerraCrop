@@ -11,6 +11,7 @@ import { Button } from '../../../components/ui/Button';
 import { LoadingSpinner } from '../../../components/ui/LoadingSpinner';
 import { ErrorState } from '../../../components/ui/ErrorState';
 import { EmptyState } from '../../../components/ui/EmptyState';
+import { getCropImage } from '../../../utils/cropImages';
 
 export const StrategiesPage: React.FC = () => {
   const { fieldId } = useParams<{ fieldId: string }>();
@@ -245,34 +246,45 @@ export const StrategiesPage: React.FC = () => {
           return (
             <Card
               key={rec.crop.id}
-              className="p-5 border border-slate-200 hover:border-[#1B4332]/40 transition-all space-y-4"
+              className="p-5 sm:p-6 border border-slate-200/90 rounded-[24px] hover:border-[#1B4332]/50 hover:shadow-md transition-all space-y-4 bg-white"
             >
-              {/* Header */}
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 rounded-2xl bg-[#F3F7F4] text-[#1B4332] flex items-center justify-center text-2xl font-bold flex-shrink-0">
-                    {index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '🌱'}
+              {/* Header with Crop Image (Inspired by Image 1 & 3) */}
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div className="flex items-center space-x-4">
+                  <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden flex-shrink-0 bg-slate-100 border border-slate-200 shadow-xs">
+                    <img
+                      src={getCropImage(rec.crop.id)}
+                      alt={rec.crop.name}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                    <div className="absolute top-1 left-1 bg-black/60 backdrop-blur-xs text-white text-[10px] font-bold px-1.5 py-0.5 rounded-md">
+                      #{index + 1}
+                    </div>
                   </div>
                   <div>
                     <div className="flex flex-wrap items-center gap-2">
-                      <h3 className="text-xl font-bold text-[#0F172A]">
+                      <h3 className="text-lg sm:text-xl font-extrabold text-[#0F172A]">
                         {rec.crop.name}
                       </h3>
-                      <span className={`text-xs px-2.5 py-0.5 rounded-full font-bold border ${fitBadge.color}`}>
+                      <span className={`text-[11px] px-2.5 py-0.5 rounded-full font-bold border ${fitBadge.color}`}>
                         {fitBadge.text}
                       </span>
                     </div>
-                    <p className="text-xs text-slate-500">
+                    <p className="text-xs text-slate-500 mt-1">
                       Family: <strong>{rec.crop.family}</strong>
-                      {rec.crop.isLegume && ' • Nitrogen-Fixing Legume'}
-                      {rec.crop.isCoverCrop && ' • Soil Cover Crop'}
+                      {rec.crop.isLegume && ' • 🌱 Nitrogen-Fixing Legume'}
+                      {rec.crop.isCoverCrop && ' • 🛡️ Soil Cover Crop'}
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-center space-x-2 self-start sm:self-center">
-                  <span className="text-xs text-slate-400">Suitability</span>
-                  <div className="px-3 py-1 bg-[#1B4332] text-white rounded-xl font-bold text-lg">
+                  <div className="text-right hidden sm:block">
+                    <div className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Suitability</div>
+                    <div className="text-xs text-emerald-700 font-medium">NASA + FAO</div>
+                  </div>
+                  <div className="px-3.5 py-1.5 bg-[#1B4332] text-white rounded-2xl font-black text-lg shadow-sm">
                     {score}%
                   </div>
                 </div>
