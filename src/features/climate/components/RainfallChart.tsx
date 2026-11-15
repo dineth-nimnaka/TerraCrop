@@ -63,11 +63,11 @@ export const RainfallChart: React.FC<RainfallChartProps> = ({
         <div className="flex items-center space-x-2">
           <span className="w-3 h-3 rounded-xs bg-[#0284C7] inline-block" />
           <span className="font-semibold text-[#0F172A]">
-            Daily Corrected Precipitation (PRECTOTCORR)
+            Daily Rainfall (mm/day)
           </span>
         </div>
         <span className="text-[11px] bg-sky-50 text-[#0369A1] font-medium px-2 py-0.5 rounded-md">
-          Unit: mm/day
+          NASA POWER Weather Data
         </span>
       </div>
 

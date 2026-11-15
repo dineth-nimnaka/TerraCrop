@@ -95,19 +95,19 @@ export const TemperatureChart: React.FC<TemperatureChartProps> = ({
         <div className="flex items-center space-x-4">
           <div className="flex items-center space-x-1.5">
             <span className="w-3 h-0.5 bg-red-500 inline-block" />
-            <span className="text-[#0F172A] font-medium">T2M_MAX (Daily Max)</span>
+            <span className="text-[#0F172A] font-medium">Max Temp (°C)</span>
           </div>
           <div className="flex items-center space-x-1.5">
             <span className="w-3 h-0.5 bg-amber-500 inline-block" />
-            <span className="text-[#0F172A] font-medium">T2M (Mean 2m)</span>
+            <span className="text-[#0F172A] font-medium">Average Temp (°C)</span>
           </div>
           <div className="flex items-center space-x-1.5">
             <span className="w-3 h-0.5 bg-blue-500 inline-block" />
-            <span className="text-[#0F172A] font-medium">T2M_MIN (Daily Min)</span>
+            <span className="text-[#0F172A] font-medium">Min Temp (°C)</span>
           </div>
         </div>
         <span className="text-[11px] bg-amber-50 text-amber-800 font-medium px-2 py-0.5 rounded-md">
-          Unit: °C
+          NASA Temperature Readings
         </span>
       </div>
 
