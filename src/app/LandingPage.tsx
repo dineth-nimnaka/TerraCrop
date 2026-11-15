@@ -8,37 +8,40 @@ export const LandingPage: React.FC = () => {
     <div className="min-h-screen bg-[#F6F9F6] flex flex-col text-[#0F172A] font-sans">
       {/* Top Navigation Bar */}
       <header className="bg-white/80 backdrop-blur-md border-b border-slate-200/80 sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-emerald-500 to-[#1B4332] p-0.5 shadow-md flex items-center justify-center">
-              <div className="w-full h-full bg-[#1B4332] rounded-[14px] flex items-center justify-center text-xl text-white">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
+          <div className="flex items-center space-x-2.5 sm:space-x-3 min-w-0">
+            <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl bg-gradient-to-br from-emerald-500 to-[#1B4332] p-0.5 shadow-md flex items-center justify-center flex-shrink-0">
+              <div className="w-full h-full bg-[#1B4332] rounded-[10px] sm:rounded-[14px] flex items-center justify-center text-lg sm:text-xl text-white">
                 🌱
               </div>
             </div>
-            <div>
-              <span className="text-xl font-extrabold tracking-tight text-[#1B4332]">
+            <div className="min-w-0">
+              <span className="text-lg sm:text-xl font-extrabold tracking-tight text-[#1B4332] truncate block">
                 TerraCrop
               </span>
-              <span className="hidden sm:inline-block ml-2.5 text-[11px] bg-emerald-100/80 text-[#1B4332] font-bold px-2.5 py-0.5 rounded-full border border-emerald-200/60">
+              <span className="hidden md:inline-block text-[11px] bg-emerald-100/80 text-[#1B4332] font-bold px-2.5 py-0.5 rounded-full border border-emerald-200/60">
                 NASA Space Apps Challenge
               </span>
             </div>
           </div>
 
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-1.5 sm:space-x-3 flex-shrink-0">
             <Link to="/login">
-              <Button variant="ghost" size="md" className="rounded-2xl font-bold">
+              <button
+                type="button"
+                className="px-3 sm:px-4 py-2 rounded-xl sm:rounded-2xl font-bold text-xs sm:text-sm text-[#1B4332] hover:bg-emerald-50 transition-colors"
+              >
                 Sign In
-              </Button>
+              </button>
             </Link>
             <Link to="/signup">
-              <Button
-                variant="primary"
-                size="md"
-                className="rounded-2xl font-extrabold bg-[#1B4332] hover:bg-[#245A43] shadow-md px-5"
+              <button
+                type="button"
+                className="px-3.5 sm:px-5 py-2 rounded-xl sm:rounded-2xl font-extrabold text-xs sm:text-sm bg-[#1B4332] text-white hover:bg-[#245A43] shadow-sm transition-all whitespace-nowrap"
               >
-                Get Started Free
-              </Button>
+                <span className="sm:hidden">Get Started</span>
+                <span className="hidden sm:inline">Get Started Free</span>
+              </button>
             </Link>
           </div>
         </div>
