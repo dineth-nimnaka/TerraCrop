@@ -17,9 +17,9 @@ const MISSING_VALUE = -999;
 
 function isMissing(value: unknown): boolean {
   if (value === null || value === undefined) return true;
-  if (typeof value !== 'number') return true;
-  if (value === MISSING_VALUE) return true;
-  if (!Number.isFinite(value)) return true;
+  const num = typeof value === 'number' ? value : parseFloat(String(value));
+  if (isNaN(num) || !Number.isFinite(num)) return true;
+  if (num <= -900) return true;
   return false;
 }
 

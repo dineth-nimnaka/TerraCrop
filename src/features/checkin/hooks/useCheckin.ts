@@ -13,6 +13,15 @@ import { db } from '../../../services/firebase';
 import { useAuth } from '../../../hooks/useAuth';
 import type { CheckinData } from '../../../types/index';
 
+function sanitizeForFirestore(obj: Record<string, any>): Record<string, any> {
+  const cleaned: Record<string, any> = {};
+  for (const [key, val] of Object.entries(obj)) {
+    // Firestore disallows 'undefined', replace with null
+    cleaned[key] = val === undefined ? null : val;
+  }
+  return cleaned;
+}
+
 export function useCheckin(fieldId?: string) {
   const { user } = useAuth();
   const [checkin, setCheckin] = useState<CheckinData | null>(null);
@@ -60,12 +69,16 @@ export function useCheckin(fieldId?: string) {
       if (!fieldId) throw new Error('Field ID is required.');
 
       const checkinsRef = collection(db, 'users', user.uid, 'checkins');
+      const payload = sanitizeForFirestore({
+        ...data,
+        fieldId,
+      });
 
       if (checkin?.id) {
         // Update existing
         const checkinDocRef = doc(db, 'users', user.uid, 'checkins', checkin.id);
         await updateDoc(checkinDocRef, {
-          ...data,
+          ...payload,
           updatedAt: serverTimestamp(),
         });
         await loadCheckin();
@@ -73,8 +86,7 @@ export function useCheckin(fieldId?: string) {
       } else {
         // Create new
         const docRef = await addDoc(checkinsRef, {
-          ...data,
-          fieldId,
+          ...payload,
           createdAt: serverTimestamp(),
           updatedAt: serverTimestamp(),
         });

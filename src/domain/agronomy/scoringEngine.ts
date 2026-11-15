@@ -115,7 +115,7 @@ export function evaluateCropSuitability(
   } else {
     // Apply what-if scenario slider adjustment
     const adjustedRainfall =
-      baseRainfall !== null
+      baseRainfall !== null && baseRainfall > 0
         ? Math.max(0, baseRainfall * (1 + rainfallAdjustmentPercent / 100))
         : null;
 
