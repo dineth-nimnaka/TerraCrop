@@ -222,3 +222,5 @@ firebase deploy --only hosting,firestore
 - **FAO-56**: Allen, R.G., Pereira, L.S., Raes, D., Smith, M. (1998). *Crop evapotranspiration - Guidelines for computing crop water requirements*. FAO Irrigation and Drainage Paper 56. Rome: Food and Agriculture Organization of the United Nations.
 - **Department of Agriculture, Sri Lanka (DOA)**: Dry zone grain legume research bulletins and crop cultivation handbooks (Peradeniya, Sri Lanka).
 - **OpenStreetMap & Nominatim**: © [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors. Open Database License (ODbL).
+ 
+**Live Application:** [TerraCrop Web App](https://terracrop-new.web.app/) 
